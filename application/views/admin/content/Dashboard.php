@@ -1,0 +1,1 @@
+<h1> Halo <?php echo $this->session->userdata('username') ?></h1>

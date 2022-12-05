@@ -1,0 +1,71 @@
+* {
+	font-family: "Roboto", sans-serif;
+	overflow-x: hidden;
+}
+
+.navbar-nav .nav-item a {
+	font-weight: bold;
+	color: black;
+	font-size: 14px;
+}
+
+.navbar-brand img {
+	width: 180px;
+}
+
+.img-footer img {
+	width: 30px;
+}
+
+.txt-footer {
+	font-size: 11px;
+	color: #b5afaf;
+}
+
+.hero {
+	background-image: url("../img/Dearserenity/Season\ I/Season\ I.png");
+	background-size: cover;
+}
+
+.text-season {
+	font-family: "Times New Roman", Times, serif;
+}
+
+.text-hero {
+	font-size: 50px;
+}
+
+.btn-reading {
+	border: 2px solid white;
+	background-color: #808080;
+	padding-left: 30px;
+	padding-right: 30px;
+	font-family: "Times New Roman", Times, serif;
+	color: white;
+}
+
+.section-new {
+	background-color: #d9d9d9;
+}
+
+.btn-shop {
+	border-radius: 30px;
+}
+
+section.login-background {
+	height: 100vh;
+	background-image: url("../img/Dearserenity/Season\ I/Season\ I.png");
+	background-size: cover;
+}
+
+.input-form {
+	width: 300px;
+}
+
+.logo-season {
+	width: 250px;
+}
+
+.section-desc {
+	background-color: #d9d9d9;
+}
