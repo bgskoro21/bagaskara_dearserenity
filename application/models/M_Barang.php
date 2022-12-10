@@ -41,6 +41,17 @@ class M_Barang extends CI_Model{
         return $query;
     }
 
+    public function getDetail($size,$id){
+        $this->db->select('tbl_detail_ukuran.ukuran, tbl_cbarang.*, tbl_barang.*');
+        $this->db->from('tbl_barang');
+        $this->db->join('tbl_cbarang','tbl_barang.barang_id = tbl_cbarang.id');
+        $this->db->join('tbl_detail_ukuran','tbl_barang.ukuran_id = tbl_detail_ukuran.id');
+        $this->db->where('tbl_detail_ukuran.ukuran',$size);
+        $this->db->where('tbl_cbarang.id',$id);
+        $query = $this->db->get()->result_array();
+        return $query[0];
+    }
+
 }
 
 

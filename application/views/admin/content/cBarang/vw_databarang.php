@@ -3,26 +3,27 @@
         <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
         </button>
-        <table class="table">
+        <table class="table" id="table-id">
             <thead>
                 <tr>
                 <th scope="col">No</th>
                 <th scope="col">Nama Barang</th>
                 <th scope="col">Foto Barang</th>
                 <th scope="col">Season</th>
+                <th scope="col">Kategori</th>
                 <th scope="col">Harga</th>
                 <th scope="col">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no=1 ?>
-                <?php $number = $no + $page_number ?>
                 <?php foreach($barang as $br) : ?>
                 <tr>
-                    <th scope="row" class="align-middle"><?php echo $number ?></th>
+                    <th scope="row" class="align-middle"><?php echo $no ?></th>
                     <td class="align-middle"><?php echo $br['nama_barang'] ?></td>
                     <td class="align-middle"><img src="<?= $br['foto_barang'] ?>" class="img-fluid foto-produk"></td>
                     <td class="align-middle"><?php echo $br['nama_season'] ?></td>
+                    <td class="align-middle"><?php echo $br['nama_category'] ?></td>
                     <td class="align-middle"><?php echo $br['harga_barang'] ?></td>
                     <td class="align-middle">
                         <a href="<?= base_url('admin/barang/showdetailbarang/'.$br['id']) ?>"><button class="btn btn-warning btn-sm" data-id="<?= $br['id'] ?>"><i class='bx bx-show text-white'></i></button></a>
@@ -32,7 +33,7 @@
                         <?php endif; ?>
                     </td>
                 </tr>
-                <?php $number++ ?>
+                <?php $no++ ?>
                 <?php endforeach; ?>
             </tbody>
             </table>
@@ -60,6 +61,30 @@
                   <?php endforeach; ?>
               </select>
               <label for="floatingInput">Pilih Season</label>
+            </div>
+            <div class="form-floating mb-2">
+              <select class="form-select" aria-label="Input Kategory" name="category_id" id="category_id">
+                  <?php foreach($categories as $category) : ?>
+                  <option value="<?= $category['id'] ?>"><?= $category['nama_category'] ?></option>
+                  <?php endforeach; ?>
+              </select>
+              <label for="floatingInput">Pilih Kategori</label>
+            </div>
+            <div class="form-floating mb-2">
+              <select class="form-select" aria-label="Input Rentang Harga" name="harga_id" id="harga_id">
+                  <?php foreach($prices as $price) : ?>
+                  <option value="<?= $price['id'] ?>"><?= $price['keterangan'] ?></option>
+                  <?php endforeach; ?>
+              </select>
+              <label for="floatingInput">Pilih Rentang Harga</label>
+            </div>
+            <div class="form-floating mb-2">
+              <select class="form-select" aria-label="Input Galeri" name="gallery_id" id="gallery_id">
+                  <?php foreach($galleries as $gallery) : ?>
+                  <option value="<?= $gallery['id'] ?>"><?= $gallery['judul'] ?></option>
+                  <?php endforeach; ?>
+              </select>
+              <label for="floatingInput">Pilih Album</label>
             </div>
             <div class="form-floating mb-2">
                 <input type="text" class="form-control" id="harga_barang" name="harga_barang" placeholder="Harga" required>
@@ -111,7 +136,10 @@
         console.log(json[0]);
         $('#nama_barang').val(json[0].nama_barang)
         $('#season_id').val(json[0].season_id)
+        $('#category_id').val(json[0].category_id)
+        $('#gallery_id').val(json[0].gallery_id)
         $('#harga_barang').val(json[0].harga_barang)
+        $('#harga_id').val(json[0].harga_id)
         $('#desc_barang').val(json[0].desc_barang)
         $('.img-preview').attr('src',json[0].foto_barang)
       }
@@ -125,8 +153,15 @@
 
         $('#nama_barang').val('')
         $('#season_id').val('')
+        $('#gallery_id').val('')
+        $('#category_id').val('')
         $('#harga_barang').val('')
+        $('#harga_id').val('')
         $('#desc_barang').val('')
         $('.img-preview').attr('src', '')
       })
+    
+      $(document).ready( function () {
+        $('#table-id').DataTable();
+      });
 </script>

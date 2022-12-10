@@ -6,41 +6,47 @@ class Barang extends CI_Controller{
         parent::__construct();
         $this->load->model('M_cBarang','mdl',TRUE);
         $this->load->model('M_Season','modelSeason',TRUE);
+        $this->load->model('M_Category','modelCategory',TRUE);
+        $this->load->model('M_Harga','modelHarga',TRUE);
+        $this->load->model('M_Gallery','modelGallery',TRUE);
         if(!$this->session->userdata('username')){
             redirect('login');
         }
     }
 
     public function index(){
-        // var_dump($this->uri->segment(1));
-        $jumlah_data = $this->mdl->jumlah_data();
-        $config['base_url'] = base_url().'/admin/barang/index';
-        $config['total_rows'] = $jumlah_data;
-        $config['per_page'] = 5;
-        // Bootstrap
-        $config['first_link']       = 'First';
-        $config['last_link']        = 'Last';
-        $config['next_link']        = 'Next';
-        $config['prev_link']        = 'Prev';
-        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        $config['full_tag_close']   = '</ul></nav></div>';
-        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close']    = '</span></li>';
-        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link bg-dark">';
-        $config['cur_tag_close']    = '<span class="sr-only"></span></span></li>';
-        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
-        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['prev_tagl_close']  = '</span>Next</li>';
-        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
-        $config['first_tagl_close'] = '</span></li>';
-        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['last_tagl_close']  = '</span></li>';
-        $from = $this->uri->segment(4);
-        $this->pagination->initialize($config);
-        $data['barang'] = $this->mdl->getBarang($config['per_page'], $from);
+        // // var_dump($this->uri->segment(1));
+        // $jumlah_data = $this->mdl->jumlah_data();
+        // $config['base_url'] = base_url().'/admin/barang/index';
+        // $config['total_rows'] = $jumlah_data;
+        // $config['per_page'] = 5;
+        // // Bootstrap
+        // $config['first_link']       = 'First';
+        // $config['last_link']        = 'Last';
+        // $config['next_link']        = 'Next';
+        // $config['prev_link']        = 'Prev';
+        // $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        // $config['full_tag_close']   = '</ul></nav></div>';
+        // $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        // $config['num_tag_close']    = '</span></li>';
+        // $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link bg-dark">';
+        // $config['cur_tag_close']    = '<span class="sr-only"></span></span></li>';
+        // $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        // $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        // $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        // $config['prev_tagl_close']  = '</span>Next</li>';
+        // $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        // $config['first_tagl_close'] = '</span></li>';
+        // $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        // $config['last_tagl_close']  = '</span></li>';
+        // $from = $this->uri->segment(4);
+        // $this->pagination->initialize($config);
+        $data['barang'] = $this->mdl->getBarang();
         $data['seasons'] = $this->modelSeason->getDataSeason();
-        $data['page_number'] = $this->uri->segment(4);
+        $data['prices'] = $this->modelHarga->getAllHarga();
+        $data['categories'] = $this->modelCategory->getAllCategory();
+        $data['galleries'] = $this->modelGallery->getAllGallery();
+        // $data['page_number'] = $this->uri->segment(4);
         $data['title'] = 'Data Barang';
         return $this->template->load_admin('admin/content/cbarang/vw_databarang',$data);
     }
@@ -50,8 +56,11 @@ class Barang extends CI_Controller{
             "nama_barang" => $this->input->post('nama_barang'),
             "harga_barang" => $this->input->post('harga_barang'),
             "desc_barang" => $this->input->post('desc_barang'),
+            'gallery_id' => $this->input->post('gallery_id'),
             "user_id" => $this->session->userdata('id'),
-            "season_id" => $this->input->post('season_id')
+            "season_id" => $this->input->post('season_id'),
+            "harga_id" => $this->input->post('harga_id'),
+            "category_id" => $this->input->post('category_id'),
         ];
 
         // var_dump($data);
@@ -101,8 +110,11 @@ class Barang extends CI_Controller{
             "nama_barang" => $this->input->post('nama_barang'),
             "harga_barang" => $this->input->post('harga_barang'),
             "desc_barang" => $this->input->post('desc_barang'),
+            'gallery_id' => $this->input->post('gallery_id'),
             "user_id" => $this->session->userdata('id'),
-            "season_id" => $this->input->post('season_id')
+            "season_id" => $this->input->post('season_id'),
+            "harga_id" => $this->input->post('harga_id'),
+            "category_id" => $this->input->post('category_id'),
         ];
         
         $config['upload_path'] = './assets/images';

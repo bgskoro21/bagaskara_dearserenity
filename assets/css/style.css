@@ -69,3 +69,29 @@ section.login-background {
 .section-desc {
 	background-color: #d9d9d9;
 }
+
+.frame-ukuran {
+	border: 1px solid black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 100px;
+	height: 40px;
+	width: 40px;
+	cursor: pointer;
+}
+
+.ukuran {
+	margin-top: -10px;
+}
+
+#jumlah {
+	width: 99%;
+	height: 50px;
+	padding: 20px 10px;
+}
+
+#btn-chart {
+	height: 50px;
+	width: 100%;
+}

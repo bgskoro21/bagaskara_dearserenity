@@ -35,6 +35,7 @@
           <ul class="sub-menu">
             <li><a class="link_name" href="<?= base_url('admin/databarang')?>">Master Barang</a></li>
             <li><a href="<?= base_url('admin/barang')?>">Data Barang</a></li>
+            <li><a href="<?= base_url('admin/unggulan')?>">Produk Unggulan</a></li>
           </ul>
         </li>
         <li>
@@ -55,21 +56,28 @@
           </ul>
         </li>
         <li>
-          <a href="<?= base_url('admin/detailukuran')?>">
-          <i class='bx bx-tachometer'></i>
-            <span class="link_name">Detail Ukuran</span>
-          </a>
+          <div class="iocn-link">
+            <a href="<?= base_url('admin/category')?>">
+              <i class='bx bx-category'></i>
+              <span class="link_name">Detail Barang</span>
+            </a>
+            <i class="bx bxs-chevron-down arrow"></i>
+          </div>
           <ul class="sub-menu">
-            <li><a class="link_name" href="<?= base_url('admin/detailukuran')?>">Detail Ukuran</a></li>
+            <li><a class="link_name" href="<?= base_url('admin/category')?>">Detail Barang</a></li>
+            <li><a href="<?= base_url('admin/category')?>">Kategori</a></li>
+            <li><a href="<?= base_url('admin/detailukuran')?>">Detail Ukuran</a></li>
+            <li><a href="<?= base_url('admin/harga')?>">Rentang Harga</a></li>
+            <li><a href="<?= base_url('admin/gallery')?>">Galeri Product</a></li>
           </ul>
         </li>
         <li>
-          <a href="#">
+          <a href="<?= base_url('admin/hero')?>">
           <i class='bx bx-home-smile'></i>
             <span class="link_name">Hero Homepage</span>
           </a>
           <ul class="sub-menu">
-            <li><a class="link_name" href="#">Hero Homepage</a></li>
+            <li><a class="link_name" href="<?= base_url('admin/hero')?>">Hero Homepage</a></li>
           </ul>
         </li>
         <li>

@@ -1,4 +1,4 @@
-<section class="d-flex justify-content-center align-items-center" style="background-image: url('<?= $season['hero_season'] ?>'); background-size:cover; height:480px;">
+<section class="d-flex justify-content-center align-items-center" style="background-image: url('<?= $season['hero_season'] ?>'); background-size:cover; height:480px; margin-top:73px;">
     <h1 class="text-white d-block">"<?= strtoupper($season['tema_season'])  ?>"</h1>
 </section>
 <section class="my-4 d-flex justify-content-center align-items-center">
@@ -10,7 +10,8 @@
     </div>
 </section>
 <section class="mb-4">
-    <div class="row d-flex justify-content-center align-items-center">
+    <div class="container">
+    <div class="row d-flex justify-content-center">
         <?php foreach($barang as $br): ?>
         <div class="col-md-3 mb-1">
          <div class="card">
@@ -21,5 +22,6 @@
           </div>
         </div>
         <?php endforeach; ?>
+    </div>
     </div>
 </section>

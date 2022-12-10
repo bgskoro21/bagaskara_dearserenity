@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top p-3">
   <div class="container">
     <a class="navbar-brand" href="#"><img src="<?= base_url('assets/img/Logo DearSerenity.png') ?>" alt=""></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,7 @@
         <li class="nav-item">
           <a class="nav-link" href="<?= base_url('user/products') ?>">PRODUCTS</a>
         </li>
-        <?php if($this->session->userdata('username')): ?>
+        <?php if($this->session->userdata('username') && ($this->session->userdata('level')=='User')): ?>
           <li class="nav-item">
           <a class="nav-link" href="<?= base_url('/login/login/handle_logout')?>">LOGOUT</a>
         </li>
