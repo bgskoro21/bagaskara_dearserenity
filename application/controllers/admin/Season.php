@@ -56,6 +56,10 @@ class Season extends CI_Controller{
 
         $hasil = $this->mdl->tambahSeason($data);
         if($hasil){
+            $this->season->set_flashdata('success','Data Season Berhasil Ditambahkan');
+            redirect('admin/season');
+        }else{
+            $this->season->set_flashdata('success','Data Season Gagal Ditambahkan');
             redirect('admin/season');
         }
     }
@@ -109,6 +113,10 @@ class Season extends CI_Controller{
         
         $hasil = $this->mdl->editDataSeason($data,$id);
         if($hasil){
+            $this->season->set_flashdata('success','Data Season Berhasil Ditambahkan');
+            redirect('admin/season');
+        }else{
+            $this->season->set_flashdata('success','Data Season Gagal Ditambahkan');
             redirect('admin/season');
         }
     }

@@ -22,6 +22,10 @@ class DetailUkuran extends CI_Controller{
 
         $hasil = $this->mdl->addDetailUkuran($data);
         if($hasil){
+            $this->session->set_flashdata('success','Data Ukuran Berhasil Ditambahkan');
+            redirect('admin/detailukuran');
+        }else{
+            $this->session->set_flashdata('success','Data Ukuran Gagal Ditambahkan');
             redirect('admin/detailukuran');
         }
     }
@@ -46,6 +50,10 @@ class DetailUkuran extends CI_Controller{
 
         $hasil = $this->mdl->edit_ukuran($data,$id);
         if($hasil){
+            $this->session->set_flashdata('success','Data Ukuran Berhasil Diupdate');
+            redirect('admin/detailukuran');
+        }else{
+            $this->session->set_flashdata('success','Data Ukuran Gagal Diupdate');
             redirect('admin/detailukuran');
         }
     }

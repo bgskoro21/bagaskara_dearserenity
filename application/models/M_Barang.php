@@ -6,6 +6,7 @@ class M_Barang extends CI_Model{
         $this->db->select('tbl_barang.*, tbl_detail_ukuran.ukuran, tbl_cbarang.nama_barang');
         $this->db->join('tbl_detail_ukuran', 'tbl_barang.ukuran_id = tbl_detail_ukuran.id');
         $this->db->join('tbl_cbarang', 'tbl_barang.barang_id = tbl_cbarang.id');
+        $this->db->order_by('tbl_cbarang.nama_barang');
         $query = $this->db->get('tbl_barang')->result_array();
         return $query;
     }

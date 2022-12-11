@@ -23,6 +23,10 @@ class Harga extends CI_Controller{
 
         $hasil = $this->mdl->add_harga($data);
         if($hasil){
+            $this->session->set_flashdata('success','Data Rentang Harga Berhasil Ditambahkan');
+            redirect('admin/harga');
+        }else{
+            $this->session->set_flashdata('success','Data Rentang Harga Gagal Ditambahkan');
             redirect('admin/harga');
         }
     }
@@ -48,6 +52,10 @@ class Harga extends CI_Controller{
 
         $hasil = $this->mdl->edit_harga($data,$id);
         if($hasil){
+            $this->session->set_flashdata('success','Data Rentang Harga Berhasil Diupdate');
+            redirect('admin/harga');
+        }else{
+            $this->session->set_flashdata('success','Data Rentang Harga Gagal Diupdate');
             redirect('admin/harga');
         }
     }

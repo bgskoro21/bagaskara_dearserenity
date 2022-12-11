@@ -3,6 +3,12 @@
         <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
         </button>
+        <?php if($this->session->flashdata('success')) : ?>
+        <div class="alert alert-success alert-dismissible fade show col-lg-6 mb-3" role="alert">
+        <?php echo $this->session->flashdata('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <?php endif ?>
         <table class="table" id="table-id">
             <thead>
                 <tr>
@@ -43,7 +49,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="<?= base_url('/admin/databarang/addDataBarang')?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('/admin/databarang/addDataBarang')?>" method="post" id="form-master" enctype="multipart/form-data">
             <div class="form-floating mb-2">
               <select class="form-select" aria-label="Input Barang" name="barang_id" id="barang_id">
                   <?php foreach($dafbarang as $barang) : ?>
@@ -61,7 +67,7 @@
               <label for="floatingInput">Pilih Ukuran</label>
             </div>
             <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="stok" name="stok" placeholder="Stok Barang" required>
+                <input type="number" class="form-control" id="stok" name="stok" placeholder="Stok Barang" required>
                 <label for="stok">Stok Barang</label>
             </div>
           </div>
@@ -74,6 +80,7 @@
       </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
 <script>
     function setRefresh(){
         location.href='<?= base_url('/admin/databarang') ?>'
@@ -121,4 +128,40 @@
       $(document).ready( function () {
         $('#table-id').DataTable();
       });
+
+      $('#form-master').validate({
+            rules: {
+                barang_id : {
+                    required: true,
+                },
+                ukuran_id : {
+                    required: true,
+                },
+                stok: {
+                    required:true,
+                },
+            },
+            messages:{
+                barang_id:{
+                    required: 'Barang harus dipilih!',
+                },
+                ukuran_id:{
+                    required: 'Ukuran harus dipilih!',
+                },
+                stok:{
+                    required: 'Stok harus diisi!',
+                },
+            },
+            errorElement: "div",
+                errorPlacement: function ( error, element ) {
+                    error.addClass( "invalid-feedback" );
+                    error.insertAfter( element );
+                },
+            highlight: function(element) {
+                $(element).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+            }
+        })
 </script>

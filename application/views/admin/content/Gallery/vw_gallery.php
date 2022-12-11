@@ -1,8 +1,14 @@
 <section class="m-3">
-    <h1>Detail Harga</h1>
+    <h1>Daftar Gallery</h1>
         <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
         </button>
+        <?php if($this->session->flashdata('success')) : ?>
+        <div class="alert alert-success alert-dismissible fade show col-lg-6 mb-3" role="alert">
+        <?php echo $this->session->flashdata('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif ?>
         <table class="table" id="table-id">
             <thead>
                 <tr>
@@ -52,7 +58,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="<?= base_url('/admin/gallery/add_gallery')?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('/admin/gallery/add_gallery')?>" method="post" enctype="multipart/form-data" id="form-gallery">
             <div class="form-floating mb-2">
                 <input type="text" class="form-control" id="judul" name="judul" placeholder="judul" required>
                 <label for="judul">Judul Galeri</label>
@@ -81,6 +87,7 @@
         </div>
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
 <script>
     function setRefresh(){
         location.href = '<?= base_url('admin/gallery') ?>';
@@ -130,4 +137,28 @@
   $(document).ready( function () {
         $('#table-id').DataTable();
       });
+
+      $('#form-gallery').validate({
+            rules: {
+                judul : {
+                    required: true,
+                },
+            },
+            messages:{
+                judul : {
+                    required: 'Judul Album Harus Diisi!',
+                },
+            },
+            errorElement: "div",
+                errorPlacement: function ( error, element ) {
+                    error.addClass( "invalid-feedback" );
+                    error.insertAfter( element );
+                },
+            highlight: function(element) {
+                $(element).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+            }
+        })
 </script>

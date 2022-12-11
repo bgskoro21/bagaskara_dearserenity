@@ -3,6 +3,12 @@
         <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
         </button>
+        <?php if($this->session->flashdata('success')) : ?>
+        <div class="alert alert-success alert-dismissible fade show col-lg-6 mb-3" role="alert">
+        <?php echo $this->session->flashdata('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif ?>
         <table class="table" id="table-id">
             <thead>
                 <tr>
@@ -49,7 +55,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="<?= base_url('admin/barang/addDataBarang') ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('admin/barang/addDataBarang') ?>" method="post" id="form-barang" enctype="multipart/form-data">
             <div class="form-floating mb-2">
                 <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Nama Barang" required>
                 <label for="nama_barang">Nama Barang</label>
@@ -109,6 +115,8 @@
       </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+
 <script>
     function setRefresh(){
         location.href='<?= base_url('/admin/barang') ?>'
@@ -164,4 +172,66 @@
       $(document).ready( function () {
         $('#table-id').DataTable();
       });
+
+      $('#form-barang').validate({
+            rules: {
+                nama_barang : {
+                    required: true,
+                },
+                season_id : {
+                    required: true,
+                },
+                category_id: {
+                    required:true,
+                },
+                harga_id: {
+                    required:true,
+                },
+                gallery_id:{
+                  required:true
+                },
+                harga_barang:{
+                  required:true,
+                  number:true
+                },
+                desc_barang:{
+                  required:true
+                }
+            },
+            messages:{
+              nama_barang : {
+                    required: 'Nama Barang Harus Diisi!',
+                },
+                season_id : {
+                    required: 'Season Harus Dipilih!',
+                },
+                category_id: {
+                    required:'Kategori Harus Dipilih!',
+                },
+                harga_id: {
+                    required:'Rentang Harga Harus Dipilih!',
+                },
+                gallery_id:{
+                  required:'Album Harus Dipilih!'
+                },
+                harga_barang:{
+                  required:'Harga Barang Harus Diisi!',
+                  number:'Harga Harus Diisi Dengan Angka!'
+                },
+                desc_barang:{
+                  required:'Deskripsi Barang Harus Diisi!'
+                }
+            },
+            errorElement: "div",
+                errorPlacement: function ( error, element ) {
+                    error.addClass( "invalid-feedback" );
+                    error.insertAfter( element );
+                },
+            highlight: function(element) {
+                $(element).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+            }
+        })
 </script>

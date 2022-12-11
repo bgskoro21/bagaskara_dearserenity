@@ -8,6 +8,12 @@
                 <i class='bx bx-show text-white'></i> Preview
                 </button></a>
         </div>
+        <?php if($this->session->flashdata('success')) : ?>
+        <div class="alert alert-success alert-dismissible fade show col-lg-6 mb-3" role="alert">
+        <?php echo $this->session->flashdata('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif ?>
         <table class="table" id="table-id">
             <thead>
                 <tr>

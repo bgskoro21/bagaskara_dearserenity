@@ -32,7 +32,11 @@ class User extends CI_Controller{
         ];
 
         $hasil = $this->mdl->tambahUser($data);
-        if($hasil){
+        if($hasil == 1){
+            $this->session->set_flashdata('success','Data User Berhasil Ditambahkan');
+            redirect('admin/user');
+        }else{
+            $this->session->set_flashdata('success','Data User Gagal Ditambahkan! Username Sudah Digunakan!');
             redirect('admin/user');
         }
     }
@@ -65,6 +69,10 @@ class User extends CI_Controller{
 
         $hasil = $this->mdl->editUser($data, $id);
         if($hasil){
+            $this->session->set_flashdata('success','Data User Berhasil Diupdate');
+            redirect('admin/user');
+        }else{
+            $this->session->set_flashdata('success','Data User Gagal Diupdate');
             redirect('admin/user');
         }
     }

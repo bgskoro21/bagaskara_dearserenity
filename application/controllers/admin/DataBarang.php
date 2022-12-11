@@ -16,7 +16,6 @@ class DataBarang extends CI_Controller{
         $data['barang'] = $this->mdl->getBarang();
         $data['dafbarang'] = $this->modelBarang->getAllBarang();
         $data['sizes'] = $this->modelDetail->getAllUkuran();
-        $data['page_number'] = $this->uri->segment(4);
         $data['title'] = 'Data Barang';
         return $this->template->load_admin('admin/content/barang/vw_databarang',$data);
     }
@@ -31,6 +30,10 @@ class DataBarang extends CI_Controller{
 
         $hasil = $this->mdl->tambahDataBarang($data);
         if($hasil){
+            $this->session->set_flashdata('success','Data Barang Berhasil Ditambahkan');
+            redirect('admin/databarang');
+        }else{
+            $this->session->set_flashdata('success','Data Barang Berhasil Ditambahkan');
             redirect('admin/databarang');
         }
     }
@@ -58,6 +61,10 @@ class DataBarang extends CI_Controller{
         $hasil = $this->mdl->editDataBarang($data,$id);
 
         if($hasil){
+            $this->session->set_flashdata('success','Data Barang Berhasil Diubah');
+            redirect('admin/databarang');
+        }else{
+            $this->session->set_flashdata('success','Data Barang Berhasil Diubah');
             redirect('admin/databarang');
         }
     }

@@ -80,6 +80,10 @@ class Barang extends CI_Controller{
 
         $hasil = $this->mdl->tambahDataBarang($data);
         if($hasil){
+            $this->session->set_flashdata('success','Data Barang Berhasil Ditambahkan!');
+            redirect('admin/barang');
+        }else{
+            $this->session->set_flashdata('success','Data Barang Gagal Ditambahkan!');
             redirect('admin/barang');
         }
     }
@@ -134,6 +138,10 @@ class Barang extends CI_Controller{
         }
 
         if($hasil){
+            $this->session->set_flashdata('success','Data Barang Berhasil Diupdate!');
+            redirect('admin/barang');
+        }else{
+            $this->session->set_flashdata('success','Data Barang Gagal Diupdate!');
             redirect('admin/barang');
         }
     }

@@ -3,6 +3,12 @@
         <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
         </button>
+        <?php if($this->session->flashdata('success')) : ?>
+        <div class="alert alert-success alert-dismissible fade show col-lg-6 mb-3" role="alert">
+        <?php echo $this->session->flashdata('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <?php endif ?>
         <table class="table" id="table-id">
             <thead>
                 <tr>
@@ -38,7 +44,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="<?= base_url('/admin/unggulan/add_unggulan')?>" method="post">
+            <form action="<?= base_url('/admin/unggulan/add_unggulan')?>" method="post" id="form-unggulan">
                 <div class="form-floating mb-2">
                 <select class="form-select" aria-label="Input Produk Unggulan" name="barang_id" id="barang_id">
                     <?php foreach($products as $product) : ?>
@@ -56,6 +62,8 @@
         </div>
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+
 <script>
     function setRefresh(){
         location.href = '<?= base_url('admin/unggulan') ?>';
@@ -99,4 +107,28 @@
   $(document).ready( function () {
         $('#table-id').DataTable();
       });
+
+      $('#form-unggulan').validate({
+            rules: {
+                barang_id : {
+                    required: true,
+                },
+            },
+            messages:{
+              barang_id : {
+                    required: 'Barang Harus Diisi!',
+                },
+            },
+            errorElement: "div",
+                errorPlacement: function ( error, element ) {
+                    error.addClass( "invalid-feedback" );
+                    error.insertAfter( element );
+                },
+            highlight: function(element) {
+                $(element).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+            }
+        })
 </script>

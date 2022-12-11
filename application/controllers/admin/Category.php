@@ -21,6 +21,10 @@ class Category extends CI_Controller{
 
         $data = $this->mdl->tambah_category($data);
         if($data){
+            $this->session->set_flashdata('success','Data Kategori Berhasil Ditambahkan');
+            redirect('admin/category');
+        }else{
+            $this->session->set_flashdata('success','Data Kategori Gagal Ditambahkan');
             redirect('admin/category');
         }
     }
@@ -44,6 +48,10 @@ class Category extends CI_Controller{
 
         $data = $this->mdl->edit_category($data);
         if($data){
+            $this->session->set_flashdata('success','Data Kategori Berhasil Diupdate');
+            redirect('admin/category');
+        }else{
+            $this->session->set_flashdata('success','Data Kategori Gagal Diupdate');
             redirect('admin/category');
         }
     }

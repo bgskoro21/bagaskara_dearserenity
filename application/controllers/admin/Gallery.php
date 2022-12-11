@@ -52,6 +52,10 @@ class Gallery extends CI_Controller {
 
         $hasil = $this->mdl->insert_gallery($data);
         if($hasil){
+            $this->session->set_flashdata('success','Data Gallery Berhasil Ditambahkan');
+            redirect('admin/gallery');
+        }else{
+            $this->session->set_flashdata('success','Data Gallery Gagal Ditambahkan');
             redirect('admin/gallery');
         }
     }
@@ -104,6 +108,10 @@ class Gallery extends CI_Controller {
 
         $hasil = $this->mdl->update_gallery($data,$id);
         if($hasil){
+            $this->session->set_flashdata('success','Data Gallery Berhasil Diupdate');
+            redirect('admin/gallery');
+        }else{
+            $this->session->set_flashdata('success','Data Gallery Gagal Diupdate');
             redirect('admin/gallery');
         }
     }

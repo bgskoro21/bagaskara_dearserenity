@@ -4,6 +4,7 @@ class M_User extends CI_Model{
 
     public function getDataUser(){
         $this->db->from('tbl_user');
+        $this->db->order_by('level','DESC');
         $query = $this->db->get()->result_array();
         return $query;
     }
@@ -16,8 +17,17 @@ class M_User extends CI_Model{
     }
 
     public function tambahUser($data){
-        $query = $this->db->insert('tbl_user',$data);
-        return $query;
+        $this->db->select('username');
+        $this->db->from('tbl_user');
+        $this->db->where('username',$data['username']);
+        $get = $this->db->get()->result();
+        if(count($get) == 0){
+          $this->db->insert('tbl_user',$data);
+          $hasil = 1;
+        }else{
+            $hasil = 0;
+        }
+        return $hasil;
     }
 
     public function getDataByID($id){

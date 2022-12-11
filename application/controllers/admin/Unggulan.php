@@ -23,6 +23,10 @@ class Unggulan extends CI_Controller{
 
         $hasil = $this->mdlUnggulan->add_featured($data);
         if($hasil){
+            $this->session->set_flashdata('success','Data Produk Unggulan Berhasil Ditambahkan');
+            redirect('admin/unggulan');
+        }else{
+            $this->session->set_flashdata('success','Data Produk Unggulan Gagal Ditambahkan');
             redirect('admin/unggulan');
         }
 
@@ -48,6 +52,10 @@ class Unggulan extends CI_Controller{
 
         $hasil = $this->mdlUnggulan->edit_featured($data,$id);
         if($hasil){
+            $this->session->set_flashdata('success','Data Produk Unggulan Berhasil Ditambahkan');
+            redirect('admin/unggulan');
+        }else{
+            $this->session->set_flashdata('success','Data Produk Unggulan Gagal Ditambahkan');
             redirect('admin/unggulan');
         }
 

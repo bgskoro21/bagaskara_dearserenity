@@ -3,15 +3,21 @@
     <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
     </button>
+    <?php if($this->session->flashdata('success')) : ?>
+        <div class="alert alert-success alert-dismissible fade show col-lg-6 mb-3" role="alert">
+        <?php echo $this->session->flashdata('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <?php endif ?>
     <div class="row">
         <?php foreach($seasons as $season) : ?>
-        <div class="col-md-3 column-card mb-4">
+        <div class="col-md-4 column-card mb-4">
             <div class="card shadow-sm">
                 <img src="<?= $season['hero_season']?>" class="card-img-top" alt="...">
                 <div class="card-body">
                 <h5 class="card-title"><?= $season['nama_season']?></h5>
                 <h4 class="card-title"><?= $season['tema_season']?></h4>
-                <p class="card-text" style="font-size: 12px;"><?= substr($season['desc_season'],0,100)?>...<a href="" class="text-decoration-none"> Read More</a></p>
+                <p class="card-text" style="font-size: 12px;"><?= $season['desc_season'] ?></p>
                 </div>
             </div>
             <div class="tombol-container">
@@ -31,7 +37,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="<?= base_url('/admin/season/add_season')?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('/admin/season/add_season')?>" method="post" enctype="multipart/form-data" id="form-season">
             <div class="form-floating mb-2">
                 <input type="text" class="form-control" id="nama_season" name="nama_season" placeholder="Nama Season" required>
                 <label for="nama_barang">Nama Season</label>
@@ -64,6 +70,8 @@
       </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+
 <script>
     function setRefresh(){
         location.href = '<?= base_url('admin/season') ?>';
@@ -111,4 +119,40 @@
     $('#desc_season').val('')
     $('.img-preview').attr('src', '');
   })
+
+  $('#form-season').validate({
+            rules: {
+                nama_season : {
+                    required: true,
+                },
+                tema_season : {
+                    required: true,
+                },
+                desc_season : {
+                    required: true,
+                },
+            },
+            messages:{
+                nama_season : {
+                    required: 'Nama Season Harus Diisi!',
+                },
+                tema_season : {
+                    required: 'Tema Season Harus Diisi',
+                },
+                desc_season : {
+                    required: 'Deskripsi Season Harus Diisi',
+                },
+            },
+            errorElement: "div",
+                errorPlacement: function ( error, element ) {
+                    error.addClass( "invalid-feedback" );
+                    error.insertAfter( element );
+                },
+            highlight: function(element) {
+                $(element).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+            }
+        })
 </script>

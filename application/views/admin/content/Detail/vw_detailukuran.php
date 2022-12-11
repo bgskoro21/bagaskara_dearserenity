@@ -1,8 +1,14 @@
 <section class="m-3">
-    <h1>Detail Ukuran</h1>
+    <h1>Daftar Ukuran</h1>
         <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
         </button>
+        <?php if($this->session->flashdata('success')) : ?>
+        <div class="alert alert-success alert-dismissible fade show col-lg-6 mb-3" role="alert">
+        <?php echo $this->session->flashdata('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif ?>
         <table class="table" id="table-id">
             <thead>
                 <tr>
@@ -40,7 +46,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="<?= base_url('/admin/detailukuran/addDetailUkuran')?>" method="post">
+            <form action="<?= base_url('/admin/detailukuran/addDetailUkuran')?>" method="post" id="form-ukuran">
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" id="ukuran" name="ukuran" placeholder="ukuran" required>
                     <label for="ukuran">Ukuran</label>
@@ -58,6 +64,8 @@
         </div>
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+
 <script>
     function setRefresh(){
         location.href = '<?= base_url('admin/detailukuran') ?>';
@@ -104,4 +112,34 @@
   $(document).ready( function () {
         $('#table-id').DataTable();
       });
+
+      $('#form-ukuran').validate({
+            rules: {
+                ukuran : {
+                    required: true,
+                },
+                keterangan:{
+                    required: true
+                }
+            },
+            messages:{
+                ukuran : {
+                    required: 'Ukuran Harus Diisi!',
+                },
+                keterangan:{
+                    required: 'Keterangan Ukuran Harus Diisi!'
+                }
+            },
+            errorElement: "div",
+                errorPlacement: function ( error, element ) {
+                    error.addClass( "invalid-feedback" );
+                    error.insertAfter( element );
+                },
+            highlight: function(element) {
+                $(element).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+            }
+        })
 </script>
