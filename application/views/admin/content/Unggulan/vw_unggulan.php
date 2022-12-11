@@ -1,13 +1,13 @@
 <section class="m-3">
-    <h1>Detail Harga</h1>
+    <h1>Produk Unggulan</h1>
         <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
         </button>
-        <table class="table" style="width: 60%;">
+        <table class="table" id="table-id">
             <thead>
                 <tr>
                 <th scope="col">No</th>
-                <th scope="col">Product Unggulan</th>
+                <th scope="col">Produk Unggulan</th>
                 <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -95,4 +95,8 @@
 
     $('#barang_id').val('')
   })
+
+  $(document).ready( function () {
+        $('#table-id').DataTable();
+      });
 </script>

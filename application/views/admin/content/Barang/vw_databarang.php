@@ -3,7 +3,7 @@
         <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
         </button>
-        <table class="table">
+        <table class="table" id="table-id">
             <thead>
                 <tr>
                 <th scope="col">No</th>
@@ -15,10 +15,9 @@
             </thead>
             <tbody>
                 <?php $no=1 ?>
-                <?php $number = $no + $page_number ?>
                 <?php foreach($barang as $br) : ?>
                 <tr>
-                    <th scope="row" class="align-middle"><?php echo $number ?></th>
+                    <th scope="row" class="align-middle"><?php echo $no ?></th>
                     <td class="align-middle"><?php echo $br['nama_barang'] ?></td>
                     <td class="align-middle"><?php echo $br['ukuran'] ?></td>
                     <td class="align-middle"><?php echo $br['stok'] ?></td>
@@ -29,11 +28,10 @@
                         <?php endif; ?>
                     </td>
                 </tr>
-                <?php $number++ ?>
+                <?php $no++ ?>
                 <?php endforeach; ?>
             </tbody>
             </table>
-            <?php echo $this->pagination->create_links(); ?>
         </div>
 </section>
     
@@ -119,4 +117,8 @@
         $('#ukuran_id').val('')
         $('.img-preview').attr('src', '')
       })
+
+      $(document).ready( function () {
+        $('#table-id').DataTable();
+      });
 </script>

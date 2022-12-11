@@ -8,7 +8,7 @@
                 <i class='bx bx-show text-white'></i> Preview
                 </button></a>
         </div>
-        <table class="table">
+        <table class="table" id="table-id">
             <thead>
                 <tr>
                 <th scope="col">No</th>
@@ -97,4 +97,8 @@
     $('.modal-body form').attr('action','<?= base_url('admin/hero/add_hero')?>')
         $('.img-preview').attr('src', '')
       })
+
+      $(document).ready( function () {
+        $('#table-id').DataTable();
+      });
 </script>

@@ -3,7 +3,7 @@
         <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
         </button>
-        <table class="table" style="width: 60%;">
+        <table class="table" id="table-id">
             <thead>
                 <tr>
                 <th scope="col">No</th>
@@ -126,4 +126,8 @@
     $('.model1-preview').attr('src', '')
     $('.model2-preview').attr('src', '')
   })
+
+  $(document).ready( function () {
+        $('#table-id').DataTable();
+      });
 </script>

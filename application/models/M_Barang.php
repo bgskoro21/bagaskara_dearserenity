@@ -2,11 +2,11 @@
 
 class M_Barang extends CI_Model{
 
-    public function getBarang($number, $offset){
+    public function getBarang(){
         $this->db->select('tbl_barang.*, tbl_detail_ukuran.ukuran, tbl_cbarang.nama_barang');
         $this->db->join('tbl_detail_ukuran', 'tbl_barang.ukuran_id = tbl_detail_ukuran.id');
         $this->db->join('tbl_cbarang', 'tbl_barang.barang_id = tbl_cbarang.id');
-        $query = $this->db->get('tbl_barang', $number, $offset)->result_array();
+        $query = $this->db->get('tbl_barang')->result_array();
         return $query;
     }
 
@@ -50,6 +50,15 @@ class M_Barang extends CI_Model{
         $this->db->where('tbl_cbarang.id',$id);
         $query = $this->db->get()->result_array();
         return $query[0];
+    }
+
+    public function getUkuranByBarangId($id){
+        $this->db->select('tbl_detail_ukuran.ukuran');
+        $this->db->from('tbl_barang');
+        $this->db->join('tbl_detail_ukuran', 'tbl_barang.ukuran_id = tbl_detail_ukuran.id');
+        $this->db->where('tbl_barang.barang_id',$id);
+        $query = $this->db->get()->result_array();
+        return $query;
     }
 
 }

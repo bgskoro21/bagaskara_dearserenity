@@ -1,4 +1,3 @@
-<?php var_dump($barang) ?>
 <section class="m-3">
     <div class="row d-flex flex-row justify-content-center">
         <div class="col-md-2">

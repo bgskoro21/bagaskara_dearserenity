@@ -150,7 +150,7 @@ class Products extends CI_Controller{
         $id = $this->input->get('id',TRUE);
         $data['title'] = 'Detail Produk';
         $data['detail'] = $this->mdlBarang->getDetail($params,$id);
-        $data['ukuran'] = $this->mdlUkuran->getAllUkuran();
+        $data['ukuran'] = $this->mdlBarang->getUkuranByBarangId($id);
         return $this->template->load('user/vw_detailproduk',$data);
     }
 }

@@ -1,9 +1,9 @@
 <section class="m-3">
     <h1>Daftar User</h1>
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
     </button>
-    <table class="table">
+    <table class="table" id="table-id">
             <thead>
                 <tr>
                 <th scope="col">No</th>
@@ -120,5 +120,22 @@
         $('#level').val(json.level);
       }
     })
+  })
+
+  $(document).ready( function () {
+        $('#table-id').DataTable();
+      });
+  
+    $('.btn-tambah').on('click', function(){
+    $('#exampleModalLabel').html('Tambah User')
+    $('.modal-footer button[type=submit]').html('Tambah Data')
+    $('.modal-body form').attr('action','<?= base_url('/admin/user/add_user')?>')
+
+    $('#nama_lengkap').val('');
+    $('#email').val('');
+    $('#username').val('');
+    $('#password').val('');
+    $('#alamat').val('');
+    $('#level').val('');
   })
 </script>
