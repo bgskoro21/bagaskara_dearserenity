@@ -26,14 +26,14 @@
                 <tr>
                     <th scope="row" class="align-middle"><?php echo $no ?></th>
                     <td class="align-middle"><?= $gallery['judul'] ?></td>
-                    <td class="align-middle"><img src="<?= $gallery['catalog_pic'] ?>" class="img-fluid foto-produk"></td>
+                    <td class="align-middle"><img src="<?= base_url($gallery['catalog_pic']) ?>" class="img-fluid foto-produk"></td>
                     <?php if($gallery['model1_pic'] != null): ?>
-                    <td class="align-middle"><img src="<?= $gallery['model1_pic'] ?>" class="img-fluid foto-produk"></td>
+                    <td class="align-middle"><img src="<?= base_url($gallery['model1_pic']) ?>" class="img-fluid foto-produk"></td>
                     <?php else :  ?>
                     <td class="align-middle">-</td>
                     <?php endif ?>    
                     <?php if($gallery['model2_pic']): ?>
-                    <td class="align-middle"><img src="<?= $gallery['model2_pic'] ?>" class="img-fluid foto-produk"></td>
+                    <td class="align-middle"><img src="<?= base_url($gallery['model2_pic']) ?>" class="img-fluid foto-produk"></td>
                     <?php else :  ?>
                     <td class="align-middle">-</td>
                     <?php endif ?>    
@@ -89,15 +89,11 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
 <script>
-    function setRefresh(){
-        location.href = '<?= base_url('admin/gallery') ?>';
-    }
     async function hapusDataUkuran(id){
         // console.log(id)
         let conf = confirm('Apakah anda yakin ingin menghapus gallery ini?')
         if(conf){
-            await fetch('<?= base_url('admin/gallery/hapus_gallery/') ?>'+id);
-            setRefresh()
+            location.href = '<?= base_url('admin/gallery/hapus_gallery/') ?>'+id;
         }else{
             return false;
         }
@@ -116,9 +112,9 @@
         const json = JSON.parse(data)
         console.log(json);
         $('#judul').val(json.judul)
-        $('.catalog-preview').attr('src', json.catalog_pic)
-        $('.model1-preview').attr('src', json.model1_pic)
-        $('.model2-preview').attr('src', json.model2_pic)
+        $('.catalog-preview').attr('src', '<?= base_url() ?>'+json.catalog_pic)
+        $('.model1-preview').attr('src', '<?= base_url() ?>'+json.model1_pic)
+        $('.model2-preview').attr('src', '<?= base_url() ?>'+json.model2_pic)
       }
     })
   })

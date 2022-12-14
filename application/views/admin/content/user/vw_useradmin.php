@@ -91,6 +91,7 @@
             </div>
             <div class="form-floating mb-2">
               <select class="form-select" aria-label="Level" name="level" id="level">
+                  <option value="Manager">Manager</option>
                   <option value="Super Admin">Super Admin</option>
                   <option value="Admin">Admin</option>
                   <option value="User">User</option>

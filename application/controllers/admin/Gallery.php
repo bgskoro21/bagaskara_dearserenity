@@ -31,7 +31,7 @@ class Gallery extends CI_Controller {
             $data['catalog_pic'] = null;
         }else{
             $catalog = $this->upload->data('file_name');
-            $data['catalog_pic'] = base_url('assets/gallery/'.$catalog);
+            $data['catalog_pic'] = 'assets/gallery/'.$catalog;
         }
 
         // var_dump($catalog);
@@ -40,14 +40,14 @@ class Gallery extends CI_Controller {
             $data['model1_pic'] = null;
         }else{
             $model1 = $this->upload->data('file_name');
-            $data['model1_pic'] = base_url('assets/gallery/'.$model1);
+            $data['model1_pic'] = 'assets/gallery/'.$model1;
         }
 
         if (!$this->upload->do_upload('model2_pic')){
             $data['model2_pic'] = null;
         }else{
             $model2 = $this->upload->data('file_name');
-            $data['model2_pic'] = base_url('assets/gallery/'.$model2);
+            $data['model2_pic'] = 'assets/gallery/'.$model2;
         }
 
         $hasil = $this->mdl->insert_gallery($data);
@@ -61,7 +61,21 @@ class Gallery extends CI_Controller {
     }
 
     public function hapus_gallery($id){
-        $this->mdl->hapus_gallery($id);
+        $gambarLama = $this->mdl->getGambarLama($id);
+        // var_dump($gambarLama);
+        $catalog = explode('/',$gambarLama['catalog_pic']);
+        $model1 = explode('/',$gambarLama['model1_pic']);
+        $model2 = explode('/',$gambarLama['model2_pic']);
+
+        $hasil = $this->mdl->hapus_gallery($id);
+
+        if($hasil){
+            $this->session->set_flashdata('Data Gallery Berhasil Dihapus!');
+            unlink('./assets/gallery/'.$catalog[2]);
+            unlink('./assets/gallery/'.$model1[2]);
+            unlink('./assets/gallery/'.$model2[2]);
+            redirect('admin/gallery');
+        }
     }
 
     public function getGalleryById($id){
@@ -72,6 +86,12 @@ class Gallery extends CI_Controller {
     }
 
     public function edit_gallery($id){
+
+        $gambarLama = $this->mdl->getGambarLama($id);
+        // var_dump($gambarLama);
+        $catalog_pic = explode('/',$gambarLama['catalog_pic']);
+        $model1_pic = explode('/',$gambarLama['model1_pic']);
+        $model2_pic = explode('/',$gambarLama['model2_pic']);
 
         $data = [
             'judul' => $this->input->post('judul'),
@@ -86,8 +106,11 @@ class Gallery extends CI_Controller {
         if (!$this->upload->do_upload('catalog_pic')){
             $this->mdl->update_gallery($data,$id);
         }else{
+            if($catalog_pic != null){
+               unlink('./assets/gallery/'.$catalog_pic[2]); 
+            }
             $catalog = $this->upload->data('file_name');
-            $data['catalog_pic'] = base_url('assets/gallery/'.$catalog);
+            $data['catalog_pic'] = 'assets/gallery/'.$catalog;
         }
 
         // var_dump($catalog);
@@ -95,15 +118,21 @@ class Gallery extends CI_Controller {
         if (!$this->upload->do_upload('model1_pic')){
             $this->mdl->update_gallery($data,$id);
         }else{
+            if($model1_pic != null){
+                unlink('./assets/gallery/'.$model1_pic[2]); 
+             }
             $model1 = $this->upload->data('file_name');
-            $data['model1_pic'] = base_url('assets/gallery/'.$model1);
+            $data['model1_pic'] = 'assets/gallery/'.$model1;
         }
 
         if (!$this->upload->do_upload('model2_pic')){
             $this->mdl->update_gallery($data,$id);
         }else{
+            if($model2_pic != null){
+                unlink('./assets/gallery/'.$model2_pic[2]); 
+             }
             $model2 = $this->upload->data('file_name');
-            $data['model2_pic'] = base_url('assets/gallery/'.$model2);
+            $data['model2_pic'] = 'assets/gallery/'.$model2;
         }
 
         $hasil = $this->mdl->update_gallery($data,$id);

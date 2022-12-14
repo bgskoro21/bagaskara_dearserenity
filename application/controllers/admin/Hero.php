@@ -26,11 +26,17 @@ class Hero extends CI_Controller{
             $uploaded_data = $this->upload->data('file_name');
         }
 
-        $data['hero_pic'] = base_url("/assets/hero/".$uploaded_data);
+        $data['hero_pic'] = "/assets/hero/".$uploaded_data;
+        $data['status'] = 'Belum Disetujui';
 
         $hasil = $this->mdl->add_hero($data);
         if($hasil){
+            $this->session->set_flashdata('success','Data Hero Berhasil Ditambahkan!');
             redirect('admin/hero');
+        }else{
+            $this->session->set_flashdata('success','Data Hero Gagal Ditambahkan!');
+            redirect('admin/hero');
+
         }
 
     }
@@ -42,7 +48,14 @@ class Hero extends CI_Controller{
     }
 
     public function hapus_hero($id){
-        $this->mdl->delete_hero($id);
+        $gambarLama = $this->mdl->getGambarLama($id);
+        $hero = explode('/',$gambarLama['hero_pic']);
+        $hasil = $this->mdl->delete_hero($id);
+        if($hasil){
+            $this->session->set_flashdata('success','Data Berhasil Dihapus!');
+            unlink('./assets/hero/'.$hero[3]);
+            redirect('admin/hero');
+        }
     }
 
     public function getDataById($id){
@@ -53,29 +66,38 @@ class Hero extends CI_Controller{
     }
 
     public function edit_hero($id){
-        $data['user_id'] = $this->session->userdata('id');
-        $gambarLama = $this->mdl->getGambarLama($id);
-        $explode = explode('/', $gambarLama['hero_pic']);
-
-        $config['upload_path'] = './assets/hero';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-
-        $this->load->library('upload',$config);
-
-        if (!$this->upload->do_upload('hero_pic')){
-            redirect('admin/hero');
-        }else{
-            if($gambarLama != null){
-                unlink('./assets/hero/'.$explode[6]);
+        if($this->session->userdata('level') != 'Manager'){
+            $data['user_id'] = $this->session->userdata('id');
+            $gambarLama = $this->mdl->getGambarLama($id);
+            $explode = explode('/', $gambarLama['hero_pic']);
+    
+            $config['upload_path'] = './assets/hero';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+    
+            $this->load->library('upload',$config);
+    
+            if (!$this->upload->do_upload('hero_pic')){
+                redirect('admin/hero');
+            }else{
+                if($gambarLama != null){
+                    unlink('./assets/hero/'.$explode[3]);
+                }
+                $uploaded_data = $this->upload->data('file_name');
             }
-            $uploaded_data = $this->upload->data('file_name');
+    
+            $data['hero_pic'] = "/assets/hero/".$uploaded_data;
+        }else{
+            $data['status'] = $this->input->post('status');
         }
-
-        $data['hero_pic'] = base_url("/assets/hero/".$uploaded_data);
 
         $hasil = $this->mdl->edit_hero($data,$id);
         if($hasil){
+            $this->session->set_flashdata('success','Data Hero Berhasil Diupdate!');
             redirect('admin/hero');
+        }else{
+            $this->session->set_flashdata('success','Data Hero Gagal Diupdate!');
+            redirect('admin/hero');
+
         }
 
 

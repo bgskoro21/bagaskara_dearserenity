@@ -15,7 +15,7 @@ class Products extends CI_Controller{
 
     public function index(){
         $data['title'] = 'Products';
-        $data['products'] = $this->mdl->getAllBarang();
+        $data['products'] = $this->mdl->getBarangDisetujui();
         $data['categories'] = $this->mdlCategory->getAllCategory();
         $data['seasons'] = $this->mdlSeason->getDataSeason();
         $data['prices'] = $this->mdlHarga->getAllHarga();
@@ -34,7 +34,7 @@ class Products extends CI_Controller{
             $output .= '
             <div class="col-md-3 mb-2">
             <div class="card">
-                <img src="'.$row['foto_barang'].'" class="card-img-top img-fluid" alt="...">
+                <img src="'.base_url($row['foto_barang']).'" class="card-img-top img-fluid" alt="...">
                 <div class="card-body">
                     <h6 class="card-title fw-bold">'.$row['nama_barang'].'</h6>
                     <p class="card-text">Rp. '.$row['harga_barang'].'</p>
@@ -65,11 +65,11 @@ class Products extends CI_Controller{
                 $output .= '
                 <div class="col-md-3 mb-2">
                 <div class="card">
-                    <img src="'.$row['foto_barang'].'" class="card-img-top img-fluid" alt="...">
+                    <img src="'.base_url($row['foto_barang']).'" class="card-img-top img-fluid" alt="...">
                     <div class="card-body">
                         <h6 class="card-title fw-bold">'.$row['nama_barang'].'</h6>
                         <p class="card-text">Rp. '.$row['harga_barang'].'</p>
-                        <a href="#" class="btn btn-dark">Lihat Detail</a>
+                        <a href="'.base_url('user/products/detail?size=M&id='.$row['id']).'" class="btn btn-dark">Lihat Detail</a>
                     </div>
                 </div>
                 </div>
@@ -96,11 +96,11 @@ class Products extends CI_Controller{
                     $output .= '
                     <div class="col-md-3 mb-2">
                     <div class="card">
-                        <img src="'.$row['foto_barang'].'" class="card-img-top img-fluid" alt="...">
+                        <img src="'.base_url($row['foto_barang']).'" class="card-img-top img-fluid" alt="...">
                         <div class="card-body">
                             <h6 class="card-title fw-bold">'.$row['nama_barang'].'</h6>
                             <p class="card-text">Rp. '.$row['harga_barang'].'</p>
-                            <a href="#" class="btn btn-dark">Lihat Detail</a>
+                            <a href="'.base_url('user/products/detail?size=M&id='.$row['id']).'" class="btn btn-dark">Lihat Detail</a>
                         </div>
                     </div>
                     </div>
@@ -127,11 +127,11 @@ class Products extends CI_Controller{
                     $output .= '
                     <div class="col-md-3 mb-2">
                     <div class="card">
-                        <img src="'.$row['foto_barang'].'" class="card-img-top img-fluid" alt="...">
+                        <img src="'.base_url($row['foto_barang']).'" class="card-img-top img-fluid" alt="...">
                         <div class="card-body">
                             <h6 class="card-title fw-bold">'.$row['nama_barang'].'</h6>
                             <p class="card-text">Rp. '.$row['harga_barang'].'</p>
-                            <a href="#" class="btn btn-dark">Lihat Detail</a>
+                            <a href="'.base_url('user/products/detail?size=M&id='.$row['id']).'" class="btn btn-dark">Lihat Detail</a>
                         </div>
                     </div>
                     </div>

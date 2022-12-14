@@ -7,6 +7,13 @@ class M_Hero extends CI_Model{
         return $query;
     }
 
+    public function getHeroDisetujui(){
+        $this->db->from('tbl_hero');
+        $this->db->where('status','Disetujui');
+        $query = $this->db->get()->result_array();
+        return $query;
+    }
+
     public function add_hero($data){
         $query = $this->db->insert('tbl_hero',$data);
         return $query;
@@ -14,7 +21,8 @@ class M_Hero extends CI_Model{
 
     public function delete_hero($id){
         $this->db->where('id',$id);
-        $this->db->delete('tbl_hero');
+        $query = $this->db->delete('tbl_hero');
+        return $query;
     }
 
     public function getHeroById($id){

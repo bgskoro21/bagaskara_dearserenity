@@ -10,7 +10,7 @@ class Unggulan extends CI_Controller{
 
     public function index(){
         $data['title']= 'Produk Unggulan';
-        $data['products'] = $this->mdl->getAllBarang();
+        $data['products'] = $this->mdl->getBarangDisetujui();
         $data['featureds'] = $this->mdlUnggulan->getAllFeatured();
         return $this->template->load_admin('admin/content/unggulan/vw_unggulan',$data);
     }

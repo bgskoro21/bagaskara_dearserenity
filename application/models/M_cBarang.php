@@ -68,12 +68,14 @@ class M_cBarang extends CI_Model{
     function getBarangBySeason($season){
         $this->db->from('tbl_cbarang');
         $this->db->where('season_id',$season);
+        $this->db->where('status','Disetujui');
         $query = $this->db->get()->result_array();
         return $query;
     }
 
     function search_data($keyword){
         $this->db->from('tbl_cbarang');
+        $this->db->where('status','Disetujui');
         $this->db->like('nama_barang',$keyword);
         $this->db->or_like('harga_barang',$keyword);
         $query = $this->db->get()->result_array();
@@ -84,7 +86,9 @@ class M_cBarang extends CI_Model{
         $this->db->from('tbl_cbarang');
         if($category!=0){
             $this->db->where('category_id',$category);
+            $this->db->where('status','Disetujui');
         }
+        $this->db->where('status','Disetujui');
         $query = $this->db->get()->result_array();
         return $query;
     }
@@ -93,7 +97,9 @@ class M_cBarang extends CI_Model{
         $this->db->from('tbl_cbarang');
         if($season!=0){
             $this->db->where('season_id',$season);
+            $this->db->where('status','Disetujui');
         }
+        $this->db->where('status','Disetujui');
         $query = $this->db->get()->result_array();
         return $query;
     }
@@ -102,7 +108,9 @@ class M_cBarang extends CI_Model{
         $this->db->from('tbl_cbarang');
         if($harga!=0){
             $this->db->where('harga_id',$harga);
+            $this->db->where('status','Disetujui');
         }
+        $this->db->where('status','Disetujui');
         $query = $this->db->get()->result_array();
         return $query;
     }
@@ -112,8 +120,16 @@ class M_cBarang extends CI_Model{
         $this->db->from('tbl_cbarang');
         $this->db->join('tbl_season','tbl_cbarang.season_id = tbl_season.id');
         $this->db->join('tbl_gallery','tbl_cbarang.gallery_id = tbl_gallery.id');
+        $this->db->where('status','Disetujui');
         $this->db->order_by('tbl_cbarang.id','DESC');
         $this->db->limit(3);
+        $query = $this->db->get()->result_array();
+        return $query;
+    }
+
+    function getBarangDisetujui(){
+        $this->db->from('tbl_cbarang');
+        $this->db->where('status','Disetujui');
         $query = $this->db->get()->result_array();
         return $query;
     }

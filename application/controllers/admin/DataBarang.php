@@ -14,7 +14,7 @@ class DataBarang extends CI_Controller{
 
     public function index(){
         $data['barang'] = $this->mdl->getBarang();
-        $data['dafbarang'] = $this->modelBarang->getAllBarang();
+        $data['dafbarang'] = $this->modelBarang->getBarangDisetujui();
         $data['sizes'] = $this->modelDetail->getAllUkuran();
         $data['title'] = 'Data Barang';
         return $this->template->load_admin('admin/content/barang/vw_databarang',$data);

@@ -2,19 +2,17 @@
     <div class="container py-4">
         <div class="row d-flex">
             <div class="col-md-7">
-                <img src="<?= $detail['foto_barang'] ?>" class="img-fluid">
+                <img src="<?= base_url($detail['foto_barang']) ?>" class="img-fluid">
             </div>
             <div class="col-md-5">
                 <h3 class="fw-bold"><?= $detail['nama_barang']  ?></h3>
                 <h4 class="fw-bold" style="color:salmon">Rp. <?= $detail['harga_barang']  ?></h4>
                 <p class="ket_ukuran">Size : <?= $detail['ukuran'] ?></p>
-                <div class="row d-flex ukuran">
+                <div class="ukuran">
                     <?php foreach($ukuran as $uk): ?>
-                    <div class="col-2 align-items-center">
-                        <div class="frame-ukuran link_ukuran " data-ukuran="<?= $uk['ukuran'] ?>" data-bid='<?= $detail['barang_id'] ?>'>
-                            <p class="my-auto"><?= $uk['ukuran'] ?></p>
+                        <div class="frame-ukuran link_ukuran d-inline-block" data-ukuran="<?= $uk['ukuran'] ?>" data-bid='<?= $detail['barang_id'] ?>'>
+                            <p class="pb-0 text-center text-ukuran"><?= $uk['ukuran'] ?></p>
                         </div>
-                    </div>
                     <?php endforeach; ?>    
                 </div>
                 <p class="mt-2">Stok : <?= $detail['stok']  ?></p>

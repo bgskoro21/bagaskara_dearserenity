@@ -1,6 +1,6 @@
 <div class="sidebar close">
       <div class="logo-details">
-        <img src="<?= base_url('assets/img/Dearserenity/Season II/Season II Logo.png') ?>" alt="Eyzel" />
+        <img src="<?= base_url('assets/img/Season II Logo.png') ?>" alt="Eyzel" />
         <span class="logo_name">DearSerenity</span>
       </div>
       <ul class="nav-links">
@@ -24,6 +24,7 @@
           </ul>
         </li>
         <?php endif ?>
+        <?php if($this->session->userdata('level') != 'Manager') : ?>
         <li>
           <div class="iocn-link">
             <a href="<?= base_url('admin/databarang')?>">
@@ -36,8 +37,21 @@
             <li><a class="link_name" href="<?= base_url('admin/databarang')?>">Master Barang</a></li>
             <li><a href="<?= base_url('admin/barang')?>">Data Barang</a></li>
             <li><a href="<?= base_url('admin/unggulan')?>">Produk Unggulan</a></li>
+            <li><a href="<?= base_url('admin/gallery')?>">Galeri Produk</a></li>
           </ul>
         </li>
+        <?php else: ?>
+        <li>
+          <a href="<?= base_url('admin/barang')?>">
+            <i class='bx bx-briefcase'></i>
+            <span class="link_name">Data Barang</span>
+          </a>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="<?= base_url('admin/barang')?>">Data Barang</a></li>
+          </ul>
+        </li>
+        <?php endif; ?>
+        <?php if($this->session->userdata('level') != 'Manager') : ?>
         <li>
           <div class="iocn-link">
             <a href="<?= base_url('admin/season')?>">
@@ -48,11 +62,6 @@
           </div>
           <ul class="sub-menu">
             <li><a class="link_name" href="<?= base_url('admin/season')?>">Season</a></li>
-            <li><a href="admin/season/season1">Season 1</a></li>
-            <li><a href="admin/season/season2">Season 2</a></li>
-            <li><a href="admin/season/season3">Season 3</a></li>
-            <li><a href="admin/season/season4">Season 4</a></li>
-            <li><a href="admin/season/season5">Season 5</a></li>
           </ul>
         </li>
         <li>
@@ -68,9 +77,9 @@
             <li><a href="<?= base_url('admin/category')?>">Kategori</a></li>
             <li><a href="<?= base_url('admin/detailukuran')?>">Detail Ukuran</a></li>
             <li><a href="<?= base_url('admin/harga')?>">Rentang Harga</a></li>
-            <li><a href="<?= base_url('admin/gallery')?>">Galeri Product</a></li>
           </ul>
         </li>
+        <?php endif; ?>
         <li>
           <a href="<?= base_url('admin/hero')?>">
           <i class='bx bx-home-smile'></i>

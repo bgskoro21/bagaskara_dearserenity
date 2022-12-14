@@ -11,7 +11,7 @@
   <div class="carousel-inner">
     <?php foreach($heros as $key => $hero): ?>
     <div class="carousel-item <?= $key == 0 ? 'active' : '' ?>">
-      <img src="<?= $hero['hero_pic'] ?>" class="d-block w-100">
+      <img src="<?= base_url($hero['hero_pic']) ?>" class="d-block w-100">
     </div>
     <?php endforeach; ?>
   </div>

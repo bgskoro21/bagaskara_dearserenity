@@ -1,8 +1,10 @@
 <section class="m-3">
     <h1>Data Barang</h1>
+        <?php if($this->session->userdata('level') != 'Manager') : ?>
         <button type="button" class="btn btn-primary mb-3 btn-tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Data
         </button>
+        <?php endif ?>
         <?php if($this->session->flashdata('success')) : ?>
         <div class="alert alert-success alert-dismissible fade show col-lg-6 mb-3" role="alert">
         <?php echo $this->session->flashdata('success') ?>
@@ -18,6 +20,7 @@
                 <th scope="col">Season</th>
                 <th scope="col">Kategori</th>
                 <th scope="col">Harga</th>
+                <th scope="col">Status</th>
                 <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -27,10 +30,29 @@
                 <tr>
                     <th scope="row" class="align-middle"><?php echo $no ?></th>
                     <td class="align-middle"><?php echo $br['nama_barang'] ?></td>
-                    <td class="align-middle"><img src="<?= $br['foto_barang'] ?>" class="img-fluid foto-produk"></td>
+                    <td class="align-middle"><img src="<?= base_url($br['foto_barang']) ?>" class="img-fluid foto-produk"></td>
                     <td class="align-middle"><?php echo $br['nama_season'] ?></td>
                     <td class="align-middle"><?php echo $br['nama_category'] ?></td>
                     <td class="align-middle"><?php echo $br['harga_barang'] ?></td>
+                    <td class="align-middle">
+                      <?php if($this->session->userdata('level') == 'Manager'): ?>
+                      <?php if($br['status'] == 'Belum Disetujui'): ?>
+                      <button class="btn btn-primary btn-edit" data-bs-target="#exampleModal" data-bs-toggle="modal" data-id="<?= $br['id'] ?>">
+                        <?php echo $br['status'] ?>
+                      </button>
+                      <?php elseif($br['status'] == 'Disetujui') : ?>
+                        <button class="btn btn-success btn-edit" data-bs-target="#exampleModal" data-bs-toggle="modal" data-id="<?= $br['id'] ?>">
+                        <?php echo $br['status'] ?>
+                        </button>
+                      <?php else : ?>
+                        <button class="btn btn-danger btn-edit" data-bs-target="#exampleModal" data-bs-toggle="modal" data-id="<?= $br['id'] ?>">
+                        <?php echo $br['status'] ?>
+                        </button>
+                      <?php endif ?>
+                      <?php else : ?>
+                      <?php echo $br['status'] ?>
+                      <?php endif ?>
+                    </td>
                     <td class="align-middle">
                         <a href="<?= base_url('admin/barang/showdetailbarang/'.$br['id']) ?>"><button class="btn btn-warning btn-sm" data-id="<?= $br['id'] ?>"><i class='bx bx-show text-white'></i></button></a>
                         <?php if($br['user_id'] == $this->session->userdata('id')): ?>
@@ -43,7 +65,6 @@
                 <?php endforeach; ?>
             </tbody>
             </table>
-            <?php echo $this->pagination->create_links(); ?>
         </div>
 </section>
     
@@ -56,6 +77,7 @@
             </div>
             <div class="modal-body">
             <form action="<?= base_url('admin/barang/addDataBarang') ?>" method="post" id="form-barang" enctype="multipart/form-data">
+            <?php if($this->session->userdata('level') != 'Manager') : ?>
             <div class="form-floating mb-2">
                 <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Nama Barang" required>
                 <label for="nama_barang">Nama Barang</label>
@@ -105,6 +127,23 @@
                 <input class="form-control" type="file" id="formFile" name="photo_barang">
                 <img src="" class="img-fluid img-sm mt-2 img-preview" style='width:100px'/>
             </div>
+            <div class="form-floating mb-2">
+              <select class="form-select" aria-label="Status" name="status" id="status" hidden>
+                  <option value="Belum Disetujui">Belum Disetujui</option>
+                  <option value="Disetujui">Disetujui</option>
+                  <option value="Ditolak">Ditolak</option>
+              </select>
+            </div>
+            <?php else : ?>
+              <div class="form-floating mb-2">
+              <select class="form-select" aria-label="Status" name="status" id="status">
+                  <option value="Belum Disetujui">Belum Disetujui</option>
+                  <option value="Disetujui">Disetujui</option>
+                  <option value="Ditolak">Ditolak</option>
+              </select>
+              <label for="floatingInput">Status</label>
+            </div>
+            <?php endif ?>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -149,7 +188,8 @@
         $('#harga_barang').val(json[0].harga_barang)
         $('#harga_id').val(json[0].harga_id)
         $('#desc_barang').val(json[0].desc_barang)
-        $('.img-preview').attr('src',json[0].foto_barang)
+        $('#status').val(json[0].status)
+        $('.img-preview').attr('src','<?= base_url() ?>'+json[0].foto_barang)
       }
     })
   })

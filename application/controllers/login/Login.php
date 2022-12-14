@@ -20,7 +20,7 @@ class Login extends CI_Controller{
         $hasil = $this->mdl->getDataLogin($username, $password);
         if($hasil){
             $this->session->set_userdata($hasil);
-            if($hasil['level'] == 'Super Admin' || $hasil['level'] == 'Admin'){
+            if($hasil['level'] != 'User'){
                 redirect('admin');
             }else{
                 redirect('/');

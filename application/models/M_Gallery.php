@@ -14,7 +14,8 @@ class M_Gallery extends CI_Model{
 
     public function hapus_gallery($id){
         $this->db->where('id',$id);
-        $this->db->delete('tbl_gallery');
+        $query = $this->db->delete('tbl_gallery');
+        return $query;
     }
 
     public function getGalleryById($id){
@@ -28,6 +29,14 @@ class M_Gallery extends CI_Model{
         $this->db->where('id',$id);
         $query = $this->db->update('tbl_gallery',$data);
         return $query;
+    }
+
+    public function getGambarLama($id){
+        $this->db->select('catalog_pic,model1_pic,model2_pic');
+        $this->db->from('tbl_gallery');
+        $this->db->where('id',$id);
+        $query = $this->db->get()->result_array();
+        return $query[0];
     }
 
 }

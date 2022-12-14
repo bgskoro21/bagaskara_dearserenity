@@ -33,20 +33,10 @@ class M_Season extends CI_Model{
         return $query;
     }
 
-    function getGambarLamaLogo($id){
-        $this->db->select('logo_season');
+    function getGambarLama($id){
+        $this->db->select('logo_season,hero_season');
         $this->db->from('tbl_season');
         $this->db->where('id',$id);
-
-        $query = $this->db->get()->result_array();
-        return $query[0];
-    }
-
-    function getGambarLamaHero($id){
-        $this->db->select('hero_season');
-        $this->db->from('tbl_season');
-        $this->db->where('id',$id);
-
         $query = $this->db->get()->result_array();
         return $query[0];
     }

@@ -10,7 +10,7 @@ class Penjualan extends CI_Controller{
     }
     public function index(){
         $data['title'] = 'Home';
-        $data['heros'] = $this->mdl->getAllHero();
+        $data['heros'] = $this->mdl->getHeroDisetujui();
         $data['newest'] = $this->mdlBarang->getNewestProducts();
         $data['featureds'] = $this->mdlUnggulan->getFeaturedProducts();
         return $this->template->load('/user/view_home',$data);

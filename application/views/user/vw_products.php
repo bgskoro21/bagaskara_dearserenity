@@ -39,7 +39,7 @@
             <?php foreach($products as $product) : ?>
             <div class="col-md-3 mb-2">
             <div class="card">
-                <img src="<?= $product['foto_barang'] ?>" class="card-img-top img-fluid" alt="...">
+                <img src="<?= base_url($product['foto_barang']) ?>" class="card-img-top img-fluid" alt="...">
                 <div class="card-body">
                     <h6 class="card-title fw-bold"><?= $product['nama_barang']  ?></h6>
                     <p class="card-text">Rp. <?= $product['harga_barang']  ?></p>

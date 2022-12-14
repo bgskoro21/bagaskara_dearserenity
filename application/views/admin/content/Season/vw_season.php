@@ -13,7 +13,7 @@
         <?php foreach($seasons as $season) : ?>
         <div class="col-md-4 column-card mb-4">
             <div class="card shadow-sm">
-                <img src="<?= $season['hero_season']?>" class="card-img-top" alt="...">
+                <img src="<?= base_url($season['hero_season'])?>" class="card-img-top">
                 <div class="card-body">
                 <h5 class="card-title"><?= $season['nama_season']?></h5>
                 <h4 class="card-title"><?= $season['tema_season']?></h4>
@@ -80,8 +80,8 @@
         // console.log(id)
         let conf = confirm('Apakah anda yakin ingin menghapus season ini?')
         if(conf){
-            await fetch('<?= base_url('admin/season/hapus_season/') ?>'+id);
-            setRefresh()
+            location.href = '<?= base_url('admin/season/hapus_season/') ?>'+id
+            // setRefresh()
         }else{
             return false;
         }
@@ -102,8 +102,8 @@
         $('#tema_season').val(json.tema_season)
         $('#user_id').val(json.user_id)
         $('#desc_season').val(json.desc_season)
-        $('.img-preview').attr('src', json.logo_season);
-        $('.hero-preview').attr('src', json.hero_season);
+        $('.img-preview').attr('src', '<?= base_url() ?>'+json.logo_season);
+        $('.hero-preview').attr('src', '<?= base_url() ?>'+json.hero_season);
       }
     })
   })

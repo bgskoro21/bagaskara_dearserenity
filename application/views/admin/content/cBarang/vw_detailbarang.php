@@ -2,7 +2,7 @@
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-4">
             <div class="card">
-                <img src="<?= $barang['foto_barang']?>" class="card-img-top img-fluid img-sm">
+                <img src="<?= base_url($barang['foto_barang'])?>" class="card-img-top img-fluid img-sm">
                 <div class="card-body">
                     <h5 class="card-title"><?= strtoupper($barang['nama_season'])?></h5>
                     <h4><?= strtoupper($barang['nama_barang'])?></h4>

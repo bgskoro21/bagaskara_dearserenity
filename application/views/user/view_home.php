@@ -13,7 +13,7 @@
     <div class="carousel-inner">
         <?php foreach($heros as $key => $hero): ?>
         <div class="carousel-item <?= $key == 0 ? 'active' : '' ?>">
-        <img src="<?= $hero['hero_pic'] ?>" class="d-block w-100 img-fluid" style="height:90vh">
+        <img src="<?= base_url($hero['hero_pic']) ?>" class="d-block w-100 img-fluid" style="height:90vh">
         </div>
         <?php endforeach; ?>
     </div>
@@ -28,7 +28,7 @@
     </div>
 </section>
 <!-- End Hero -->
-<section class="section-new mb-4">
+<section class="section mb-4">
     <div class="container my-3 py-4">
         <h6 class="text-center fw-bold mb-4">NEWEST PRODUCTS</h6>
         <div class="row d-flex justify-content-between">
@@ -38,7 +38,7 @@
                     <?php if($new['model1_pic']): ?>
                     <img src="<?= $new['model1_pic'] ?>" class="card-img-top" alt="...">
                     <?php else : ?>
-                    <img src="<?= $new['foto_barang'] ?>" class="card-img-top" alt="...">
+                    <img src="<?= base_url($new['foto_barang']) ?>" class="card-img-top" alt="...">
                     <?php endif ?>
                     <div class="card-body">
                         <p class="card-text text-center fw-bold"><?= strtoupper($new['nama_season'])  ?></p>
@@ -52,31 +52,8 @@
         <center><a href="<?= base_url('user/products') ?>"><button class="btn btn-outline-dark mt-5 btn-shop px-4">Shop All</button></a></center>
     </div>
 </section>
-<section>
-    <div class="container my-4">
-        <div class="row d-flex justify-content-between">
-            <div class="col-md-6">
-                <img src="<?= base_url('/assets/img/Dearserenity/Season IV/Malais/Malais (1).png')?>" class="img-fluid">
-            </div>
-            <div class="col-md-6">
-                <img src="<?= base_url('/assets/img/Dearserenity/Season I/The Doll/The Doll(1).jpg')?>" class="img-fluid">
-            </div>
-        </div>
-        <div class="row d-flex justify-content-between mt-3">
-            <div class="col-md-4">
-                <img src="<?= base_url('/assets/img/Dearserenity/Season I/Who_s Controls My Brain_/Who_s Controls My Brain(2).png')?>" class="img-fluid">
-            </div>
-            <div class="col-md-4">
-                <img src="<?= base_url('/assets/img/Dearserenity/Season I/The Doll/The Doll(2).jpg')?>" class="img-fluid">
-            </div>
-            <div class="col-md-4">
-                <img src="<?= base_url('/assets/img/Dearserenity/Season I/Who_s Controls My Brain_/Who_s Controls My Brain(1).png')?>" class="img-fluid">
-            </div>
-        </div>
-    </div>
-</section>
 
-<section class="section-new my-4">
+<section class="section-new mt-4">
     <div class="container my-3 py-4">
         <h6 class="text-center fw-bold mb-4">FEATURED PRODUCTS</h6>
         <div class="row d-flex justify-content-between">

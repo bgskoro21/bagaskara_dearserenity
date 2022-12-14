@@ -18,12 +18,18 @@ class Season extends CI_Controller{
     }
 
     public function hapus_season($id){
-        // $gambarLama = $this->mdl->getGambarLama($id);
-        // $explode = explode('/', $gambarLama['logo_season']);
-        $this->mdl->delete_season($id);
-        // if($hasil){
-        //     unlink('./assets/images/'.$explode[6]);
-        // }
+        $gambarLama = $this->mdl->getGambarLama($id);
+        // var_dump($gambarLama);die;
+        $logo = explode('/', $gambarLama['logo_season']);
+        // var_dump($logo);
+        $hero = explode('/', $gambarLama['hero_season']);
+        $hasil = $this->mdl->delete_season($id);
+        if($hasil){
+            $this->session->set_flashdata('success','Data Berhasil Dihapus');
+            unlink('./assets/img_season/'.$logo[3]);
+            unlink('./assets/img_season/'.$hero[3]);
+            redirect('admin/season');
+        }
     }
 
     public function add_season(){
@@ -51,15 +57,15 @@ class Season extends CI_Controller{
             $img_season = $this->upload->data('file_name');
         }
 
-        $data['logo_season'] = base_url("/assets/img_season/".$uploaded_data);
-        $data['hero_season'] = base_url('/assets/img_season/'.$img_season);
+        $data['logo_season'] = "/assets/img_season/".$uploaded_data;
+        $data['hero_season'] = '/assets/img_season/'.$img_season;
 
         $hasil = $this->mdl->tambahSeason($data);
         if($hasil){
-            $this->season->set_flashdata('success','Data Season Berhasil Ditambahkan');
+            $this->session->set_flashdata('success','Data Season Berhasil Ditambahkan');
             redirect('admin/season');
         }else{
-            $this->season->set_flashdata('success','Data Season Gagal Ditambahkan');
+            $this->session->set_flashdata('success','Data Season Gagal Ditambahkan');
             redirect('admin/season');
         }
     }
@@ -73,10 +79,9 @@ class Season extends CI_Controller{
 
     public function editDataSeason($id){
 
-        $gambarLama = $this->mdl->getGambarLamaLogo($id);
-        $explode = explode('/', $gambarLama['logo_season']);
-        $heroLama = $this->mdl->getGambarLamaHero($id);
-        $explode = explode('/', $heroLama['hero_season']);
+        $gambarLama = $this->mdl->getGambarLama($id);
+        $logo = explode('/', $gambarLama['logo_season']);
+        $hero = explode('/', $gambarLama['hero_season']);
         // var_dump($explode);
 
         $data = [
@@ -95,28 +100,28 @@ class Season extends CI_Controller{
             $hasil = $this->mdl->editDataSeason($data,$id);
         }else{
             if($gambarLama != null){
-                unlink('./assets/logo_season/'.$explode[6]);
+                unlink('./assets/img_season/'.$logo[3]);
             }
             $uploaded_data = $this->upload->data('file_name');
-            $data['logo_season'] = base_url("/assets/img_season/".$uploaded_data);
+            $data['logo_season'] = "/assets/img_season/".$uploaded_data;
         }
 
         if (!$this->upload->do_upload('hero_season')){
             $hasil = $this->mdl->editDataSeason($data,$id);
         }else{
             if($gambarLama != null){
-                unlink('./assets/img_season/'.$explode[6]);
+                unlink('./assets/img_season/'.$hero[3]);
             }
             $img_hero = $this->upload->data('file_name');
-            $data['hero_season'] = base_url("/assets/img_season/".$img_hero);
+            $data['hero_season'] = "/assets/img_season/".$img_hero;
         }
         
         $hasil = $this->mdl->editDataSeason($data,$id);
         if($hasil){
-            $this->season->set_flashdata('success','Data Season Berhasil Ditambahkan');
+            $this->session->set_flashdata('success','Data Season Berhasil Ditambahkan');
             redirect('admin/season');
         }else{
-            $this->season->set_flashdata('success','Data Season Gagal Ditambahkan');
+            $this->session->set_flashdata('success','Data Season Gagal Ditambahkan');
             redirect('admin/season');
         }
     }

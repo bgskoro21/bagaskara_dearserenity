@@ -53,8 +53,15 @@
 }
 
 section.login-background {
+	margin-top: 72px;
 	height: 100vh;
-	background-image: url("../img/Dearserenity/Season\ I/Season\ I.png");
+	background-image: url("../img/Season\ I.png");
+	background-size: cover;
+}
+
+section.registrasi-background {
+	margin-top: 72px;
+	background-image: url("../img/Season\ I.png");
 	background-size: cover;
 }
 
@@ -72,17 +79,16 @@ section.login-background {
 
 .frame-ukuran {
 	border: 1px solid black;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 100px;
-	height: 40px;
-	width: 40px;
+	width: 50px;
 	cursor: pointer;
 }
 
 .ukuran {
 	margin-top: -10px;
+}
+
+.text-ukuran {
+	margin: auto 10px;
 }
 
 #jumlah {
